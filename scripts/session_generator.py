@@ -1,16 +1,18 @@
 import click
 import pyrogram
 
+
 async def client_get_me(client: pyrogram.Client) -> str:
     async with client:
         return await client.get_me()
+
 
 @click.group()
 def create_config() -> None:
     pass
 
+
 @create_config.command()
-@client.option('--silent', is_flag=True, default=False)
 @click.option('--name', prompt=True, required=True, type=click.STRING, help='Name of the session')
 @click.option(
     '--api-id',
@@ -29,7 +31,6 @@ def create_config() -> None:
 )
 @click.password_option('--bot-token', required=True, help='Bot token can be obtained from t.me/BotFather')
 def create_bot_config(
-    silent: bool,
     name: str,
     api_id: int,
     api_hash: str,
@@ -42,15 +43,11 @@ def create_bot_config(
         bot_token=bot_token,
     )
 
-    if silent:
-        client.run()
-    else:
-        client.run(client_get_me(client))
-        client.echo(client_info)
+    client_info = client.run(client_get_me(client))
+    click.echo(client_info)
 
 
 @create_config.command()
-@client.option('--silent', is_flag=True, default=False)
 @click.option('--name', prompt=True, required=True, type=click.STRING, help='Name of the session')
 @click.option(
     '--api-id',
@@ -70,7 +67,6 @@ def create_bot_config(
 @click.password_option('--phone-number', required=True, help='Phone number with country code prefix')
 @click.password_option('--password', help='Two-Step Verification password')
 def create_user_config(
-    silent: bool,
     name: str,
     api_id: int,
     api_hash: str,
@@ -85,12 +81,8 @@ def create_user_config(
         password=password,
     )
 
-    if silent:
-        client.run()
-    else:
-        client.run(client_get_me(client))
-        client.echo(client_info)
-
+    client_info = client.run(client_get_me(client))
+    click.echo(client_info)
 
 
 if __name__ == "__main__":
