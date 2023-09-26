@@ -1,9 +1,9 @@
 # Pyrocatto
-> A multiclient bot that leverages the pyrogram's smart plugins system.
+> A multiclient bot that leverages pyrogram's smart plugins system.
 <br />
 
 # Installation
-### With optional speedups(Installs packages like TgCrypto for Pyrogram):
+### With optional speedups (Installs packages like TgCrypto for Pyrogram):
 - `pip install pyrocatto[speedups]`
 ### Without optional speedups:
 - `pip install pyrocatto`

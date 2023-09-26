@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pyrocatto"
-version = "1.2.1"
-description = "A multiclient bot that leverages the pyrogram's smart plugins system."
+version = "1.2.1.post1"
+description = "A multiclient bot that leverages pyrogram's smart plugins system."
 authors = ["devops117 <devops117.main@protonmail.com>"]
 license = "MIT"
 readme = "README.md"
