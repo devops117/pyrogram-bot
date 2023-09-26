@@ -1,18 +1,15 @@
-default: &default
-  # Telegram environment variables
-  telegram_api_id: 'TELEGRAM_API_ID'
-  telegram_api_hash: 'TELEGRAM_API_HASH'
-  telegram_bot_token: Null
-  wheel_userids:
-    - 1698923450
+user: &user
   plugins:
     root: 'plugins.user_plugins'
     include: Null
     exclude: Null
 
-clients: # session_name: {options}
-  owo: {<<: *default}
-#  kjb2k124vk2jv41214bj2k4b12kb12k4v2: {<<: *default} # session_name can be substituted for session string
+  addons:
+    wheel_userids:
+      - 1698923450
+
+sessions: # name: {options}
+  cattobot: {<<: *user}
 
 # Notes:
 #
@@ -30,11 +27,13 @@ clients: # session_name: {options}
 #      - 'extra_plugin'
 #    exclude:
 #      - 'unwanted'
-#  wheel_userids:
-#    - 12312421
-#    - 25235423
-#    - 21424111
-#  ...
+#
+#  addons:
+#    wheel_userids:
+#      - 12312421
+#      - 25235423
+#      - 21424111
+#      - ...
 #
 #sessions:
 #  something: {<<: *custom}

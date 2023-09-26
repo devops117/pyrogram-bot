@@ -1,9 +1,3 @@
-# Bot configuration
-config.yaml
-
-# Session files
-*.session
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,2 +1,2 @@
 # pyrogram-template
-A multiclient bot template which uses pyrogram's smart plugins.
+A multiclient bot that leverages the pyrogram's smart plugins system.

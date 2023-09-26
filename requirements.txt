@@ -1,4 +1,0 @@
-git+https://github.com/devops117/pyrogram.git
-tgcrypto
-ruamel.yaml
-click
