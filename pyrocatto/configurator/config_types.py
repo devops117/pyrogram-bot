@@ -22,6 +22,8 @@
 
 
 from collections.abc import Iterable
+import logging
+from pathlib import Path
 
 import attrs # attrs.asdict
 from attrs import define, field, validators
@@ -62,13 +64,22 @@ class ClientConfig:
     plugin_config: field(validator=validators.instance_of(PluginConfig))
     addon_config: field(validator=validators.instance_of(AddonConfig))
 
-    def create_client(self, workdir: str) -> pyrogram.Client:
+    def create_client(self, session_dir: str) -> pyrogram.Client:
         self.plugin_config = attrs.asdict(self.plugin_config) # pyrogram wants .copy()
+
+        session = Path(
+            session_dir,
+            self.name + ".session"
+        )
+        if not session.is_file():
+            logging.fatal(f"UNABLE TO LOAD SESSION: {session}")
+            logging.fatal("EXITING PYROCATTO-BOT")
+            exit(-1)
 
         client = pyrogram.Client(
             self.name,
             plugins=self.plugin_config,
-            workdir=workdir,
+            workdir=session_dir,
         )
         client.addons = self.addon_config
         return client
