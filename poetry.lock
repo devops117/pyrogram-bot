@@ -148,7 +148,7 @@ files = [
 name = "tgcrypto"
 version = "1.2.5"
 description = "Fast and Portable Cryptography Extension Library for Pyrogram"
-optional = false
+optional = true
 python-versions = "~=3.7"
 files = [
     {file = "TgCrypto-1.2.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:4507102377002966f35f2481830b7529e00c9bbff8c7d1e09634f984af801675"},
@@ -209,7 +209,10 @@ files = [
     {file = "TgCrypto-1.2.5.tar.gz", hash = "sha256:9bc2cac6fb9a12ef5b08f3dd500174fe374d89b660cce981f57e3138559cb682"},
 ]
 
+[extras]
+speedups = ["TgCrypto"]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "28ebf8e9285147239c87438355e96a2f09ea13c1ae6bbd3d15be166773052e4b"
+content-hash = "e0f959ac5877892ddb362b0024217df053c95731bf733fa9bdc2a55e77384ce1"
