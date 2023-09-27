@@ -1,6 +1,6 @@
-from . import configurator
+from .client_builder import client_builder
 from . import filters
 
-__version__ = "1.2.1.post1"
+__version__ = "2.0.0"
 
-__all__ = ["configurator", "filters"]
+__all__ = ["client_builder", "filters"]

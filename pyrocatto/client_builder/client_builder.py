@@ -21,13 +21,15 @@
 #SOFTWARE.
 
 
-from collections.abc import Iterable
+from collections.abc import Generator, Iterable
 import logging
 from pathlib import Path
+import typing # io.TextIO
 
 import attrs # attrs.asdict
 from attrs import define, field, validators
 import pyrogram # pyrogram.Client
+from ruamel.yaml import YAML
 
 
 @define
@@ -64,12 +66,35 @@ class ClientConfig:
     plugin_config: field(validator=validators.instance_of(PluginConfig))
     addon_config: field(validator=validators.instance_of(AddonConfig))
 
+    @staticmethod
+    def from_yaml(yaml_config: typing.TextIO) -> Generator["ClientConfig"]:
+        yaml = YAML(typ="safe")
+        client_configs = yaml.load(yaml_config)
+        client_configs = client_configs["sessions"]
+
+        for name, config in client_configs.items():
+            plugin_config = PluginConfig(**config["plugins"])
+            addon_config = AddonConfig(**config["addons"])
+
+            yield ClientConfig(
+                name,
+                plugin_config=plugin_config,
+                addon_config=addon_config,
+            )
+
+@define
+class ClientBuilder:
+    client_config: field(validator=validators.instance_of(ClientConfig))
+
     def create_client(self, session_dir: str) -> pyrogram.Client:
-        self.plugin_config = attrs.asdict(self.plugin_config) # pyrogram wants .copy()
+        name = self.client_config.name
+        plugin_config = self.client_config.plugin_config
+        plugin_config = attrs.asdict(plugin_config) # pyrogram wants .copy()
+        addon_config = self.client_config.addon_config
 
         session = Path(
             session_dir,
-            self.name + ".session"
+            name + ".session"
         )
         if not session.is_file():
             logging.fatal(f"UNABLE TO LOAD SESSION: {session}")
@@ -77,12 +102,12 @@ class ClientConfig:
             exit(-1)
 
         client = pyrogram.Client(
-            self.name,
-            plugins=self.plugin_config,
+            name,
+            plugins=plugin_config,
             workdir=session_dir,
         )
-        client.addons = self.addon_config
+        client.addons = addon_config
         return client
 
 
-__all__ = ["AddonConfig", "PluginConfig", "ClientConfig"]
+__all__ = ["AddonConfig", "PluginConfig", "ClientConfig", "ClientBuilder"]
