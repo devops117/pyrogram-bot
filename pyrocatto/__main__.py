@@ -27,8 +27,8 @@ import typing # typing.TextIO
 import click # click.command, click.option, click.File, click.Path
 import pyrogram # pyrogram.compose
 
-import pyrocatto
-from .configurator import session_loader
+import pyrocatto # pyrocatto.__version__
+from pyrocatto.client_builder import ClientConfig, ClientBuilder
 
 
 @click.group()
@@ -45,9 +45,9 @@ def start(session_dir: str, config: typing.TextIO, debug: bool) -> None:
     else:
         logging.basicConfig(level=logging.INFO)
 
-    sessions = session_loader.from_yaml(config)
-    
-    pyrogram.compose(session.create_client(session_dir) for session in sessions)
+    client_configs = ClientConfig.from_yaml(config)
+    client_builders = map(ClientBuilder, client_configs)
+    pyrogram.compose(client_builder.create_client(session_dir) for client_builder in client_builders)
 
 @pyrocatto_bot.command()
 def version() -> None:
