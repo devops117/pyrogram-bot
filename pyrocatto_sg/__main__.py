@@ -93,21 +93,18 @@ def create_bot_session(
     help='API hash can be obtained from my.telegram.org',
 )
 @click.password_option('--phone-number', required=True, help='Phone number with country code prefix')
-@click.password_option('--password', help='Two-Step Verification password')
 def create_user_session(
     session_dir: str,
     name: str,
     api_id: int,
     api_hash: str,
     phone_number: str,
-    password: typing.Optional[str],
 ) -> None:
     client = pyrogram.Client(
         name,
         api_id,
         api_hash,
         phone_number=phone_number,
-        password=password,
         workdir=session_dir,
     )
 
