@@ -1,14 +1,11 @@
 [tool.poetry]
-name = "pyrocatto"
-version = "3.0.0"
+name = "pyrocatto-bot"
+version = "4.1.0.post1"
 description = "A multiclient bot that leverages pyrogram's smart plugins system."
 authors = ["devops117 <devops117.main@protonmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [
-    { include = "pyrocatto" },
-    { include = "pyrocatto_sg" },
-]
+packages = [{include = "pyrocatto_bot"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -17,6 +14,7 @@ click = "^8.1.3"
 ruamel-yaml = "^0.17.32"
 pyrocatto-pyrogram = "^2.0.107"
 TgCrypto = {version = "^1.2.5", optional = true}
+pyrocatto-sg = {extras = ["speedups"], version = "^0.2.0.post1"}
 
 [tool.poetry.extras]
 speedups = ["TgCrypto"]

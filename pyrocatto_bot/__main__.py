@@ -27,15 +27,15 @@ import typing # typing.TextIO
 import click # click.command, click.option, click.File, click.Path
 import pyrogram # pyrogram.compose
 
-import pyrocatto # pyrocatto.__version__
-from pyrocatto.client_builder import ClientConfig, ClientBuilder
+import pyrocatto_bot # __version__
+from .client_builder import ClientConfig, ClientBuilder
 
 
 @click.group()
-def pyrocatto_bot() -> None:
+def start_bot() -> None:
     pass
 
-@pyrocatto_bot.command()
+@start_bot.command()
 @click.option('--session-dir', required=True, type=click.Path(exists=True, readable=True, file_okay=False, dir_okay=True))
 @click.option('--config', required=True, type=click.File(mode='r'))
 @click.option('--debug', is_flag=True, default=False)
@@ -49,12 +49,12 @@ def start(session_dir: str, config: typing.TextIO, debug: bool) -> None:
     client_builders = map(ClientBuilder, client_configs)
     pyrogram.compose(client_builder.create_client(session_dir) for client_builder in client_builders)
 
-@pyrocatto_bot.command()
+@start_bot.command()
 def version() -> None:
-    click.echo(pyrocatto.__version__)
+    click.echo(pyrocatto_bot.__version__)
 
 
 if __name__ == "__main__":
-    pyrocatto_bot()
+    start_bot()
 
 __all__ = [""]

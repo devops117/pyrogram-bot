@@ -1,20 +1,20 @@
-# Pyrocatto
+# pyrocatto bot
 > A multiclient bot that leverages pyrogram's smart plugins system.
 <br />
 
 # Installation
 ### With optional speedups (Installs packages like TgCrypto for Pyrogram):
-- `pip install pyrocatto[speedups]`
+- `pip install pyrocatto_bot[speedups]`
 ### Without optional speedups:
-- `pip install pyrocatto`
+- `pip install pyrocatto_bot`
 <br />
 
 # Usage:
 > after setting up sessions and writing the configuration
 ### Make sure to be in the directory the plugins are located in!
-- `python -m pyrocatto --session-dir <session_dir> --config <config_file>`
+- `python -m pyrocatto_bot --session-dir <session_dir> --config <config_file>`
 ### For debugging:
-- `python -m pyrocatto --session-dir <session_dir> --config <config_file> --debug`
+- `python -m pyrocatto_bot --session-dir <session_dir> --config <config_file> --debug`
 <br />
 
 # Setting up sessions to use in configs:
