@@ -1,4 +1,4 @@
-# Pyrocatto
+# pyrocatto bot
 > A multiclient bot that leverages pyrogram's smart plugins system.
 <br />
 
